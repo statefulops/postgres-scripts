@@ -62,13 +62,14 @@ k apply -f backup_secret.yaml
 
 or a one-liner
 
+```bash
 printf '[global]\nrepo2-s3-key=%s\nrepo2-s3-key-secret=%s\n' \
   "$(kubectl get secret rustfs-admin-credentials -n rustfs -o jsonpath='{.data.access-key}' | base64 -d)" \
   "$(kubectl get secret rustfs-admin-credentials -n rustfs -o jsonpath='{.data.secret-key}' | base64 -d)" \
 | kubectl create secret generic cluster1-pgbackrest-secrets -n pg-operator \
     --from-file=s3.conf=/dev/stdin --dry-run=client -o yaml \
 | kubectl apply -f -
-
+```
 
 ## 4. Make rustfs usable as a pgBackRest S3 repo
 
