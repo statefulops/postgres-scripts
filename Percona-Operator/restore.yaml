@@ -1,0 +1,10 @@
+apiVersion: pgv2.percona.com/v2
+kind: PerconaPGRestore
+metadata:
+  name: restore1
+spec:
+  pgCluster: cluster1
+  repoName: repo2
+  options:
+  - --type=immediate
+  - --set=20261013-142013F_20261015-165445I
